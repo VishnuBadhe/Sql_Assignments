@@ -1,0 +1,141 @@
+EXPLAIN FORMAT JSON SELECT * FROM books WHERE subject = "C Programming";
+
+CREATE TABLE students(
+     std INT,
+     rollno INT,
+     name VARCHAR(20),
+     marks DECIMAL(10,2),
+     UNIQUE (std,rollno));
+
+INSERT INTO students VALUES(1,1,"SOHAM",35);
+INSERT INTO students VALUES(1,2,"MOHAN",45);
+INSERT INTO students VALUES(2,1,"ROHAN",55);
+INSERT INTO students VALUES(2,2,"MAHESH",65);
+
+SELECT * FROM students;
+
+DESC students;
+
+SHOW INDEXES FROM students;
+
+
+
+
+
+
+CREATE TABLE cdac_student(
+   prn CHAR(12) PRIMARY KEY,  
+   name VARCHAR(30) NOT NULL,
+   email VARCHAR(50) UNIQUE NOT NULL,
+   mobile VARCHAR(12) UNIQUE NOT NULL,
+   addr VARCHAR(80)
+);
+
+
+INSERT INTO cdac_student VALUES(1001, "rohan", "rohan@11", "8045756247", "pune");
+
+INSERT INTO cdac_student VALUES(1001, "pradnya", "pradnya@11", "8045756247", "pune");
+
+INSERT INTO cdac_student VALUES(NULL, "pradnya", "pradnya@11", "8045756247", "pune");
+
+INSERT INTO cdac_student VALUES(1002, "NULL", "pradnya@11", "8045756247", "pune");
+
+INSERT INTO cdac_student VALUES(1002, "NULL", "pradnya@11", "126546464", "pune");
+
+
+
+
+
+
+
+CREATE TABLE students(
+     std INT,
+     rollno INT,
+     name VARCHAR(20),
+     marks DECIMAL(10,2),
+     PRIMARY KEY (std,rollno));
+
+INSERT INTO students VALUES(1,1,"SOHAM",35);
+INSERT INTO students VALUES(1,2,"MOHAN",45);
+INSERT INTO students VALUES(2,1,"ROHAN",55);
+INSERT INTO students VALUES(2,2,"MAHESH",65);
+
+SELECT * FROM students;
+
+DESC students;
+
+SHOW INDEXES FROM students;
+
+
+
+
+CREATE TABLE products(
+     pid INT AUTO_INCREMENT,
+     pname VARCHAR(20),
+     price DECIMAL(10,2), 
+     PRIMARY KEY(pid) 
+);
+
+
+DESC products;
+
+INSERT INTO products(pname,price) VALUES("Redmi",100000);
+INSERT INTO products(pname,price) VALUES("samsung",200000);
+
+INSERT INTO products(pname,price) VALUES("Bread",35);
+INSERT INTO products(pname,price) VALUES("Milk",40);
+
+INSERT INTO products(pname,price) VALUES("Odomos",50);
+
+
+INSERT INTO products(pname,price) VALUES(5,"Maggie",14);
+
+INSERT INTO products VALUES(22,"Maggie",14);
+
+INSERT INTO products(pname,price) VALUES("Lays",14);
+
+
+
+
+
+CREATE TABLE depts(
+    deptno INT PRIMARY KEY,
+    dname CHAR(5)
+);
+
+
+INSERT INTO depts VALUES(10, "DEV");
+INSERT INTO depts VALUES(20, "QA");
+INSERT INTO depts VALUES(30, "OPS");
+INSERT INTO depts VALUES(40, "ACC");
+
+
+SELECT * FROM depts;
+
+
+
+
+CREATE TABLE emps(
+    empno INT PRIMARY KEY,
+    ename CHAR(10),
+    mgr INT,
+    deptno INT,
+    FOREIGN KEY (deptno) REFERENCES depts(deptno)
+);
+
+
+SHOW INDEXES FROM emps;
+
+
+INSERT INTO emps VALUES(1,"Amit",4,10);
+INSERT INTO emps VALUES(2,"Rahul",3,10);
+INSERT INTO emps VALUES(3,"Nilesh",4,20);
+INSERT INTO emps VALUES(4,"Nitin",5,50);
+INSERT INTO emps VALUES(5,"SARANG",NULL,50);
+
+
+
+
+
+
+

@@ -1,0 +1,211 @@
+-- display ename and taluka of all the employees
+SELECT * FROM emps;
+SELECT * FROM addr;
+
+
+SELECT e.ename, a.tal FROM emps e
+INNER JOIN addr a ON
+e.empno=a.empno;
+
+
+
+
+-- display ename,deptname and district of all employess
+
+
+SELECT * FROM emps;
+SELECT * FROM depts;
+SELECT * FROM addr;
+
+
+SELECT e.ename,d.dname FROM emps e
+INNER JOIN depts d ON
+e.deptno=d.deptno;
+
+SELECT e.ename, a.dist FROM emps e
+INNER JOIN addr a ON
+e.empno=a.empno;
+
+
+SELECT e.ename,d.dname,a.dist FROM emps e
+INNER JOIN depts d ON e.deptno = d.deptno
+INNER JOIN addr a ON e.empno = a.empno;
+
+
+SELECT e.ename,d.dname,a.dist FROM emps e
+LEFT JOIN depts d ON e.deptno = d.deptno
+INNER JOIN addr a ON e.empno = a.empno;
+
+
+
+
+-- display ename and meeting topic, he is attending
+
+SELECT * FROM emps;
+SELECT * FROM meeting; 
+SELECT * FROM emp_meeting;  
+
+
+SELECT e.ename,m.meetno FROM emps e
+INNER JOIN emp_meeting m ON
+e.empno = m.empno;
+
+
+SELECT t.topic,m.empno FROM meeting t
+INNER JOIN emp_meeting m ON
+t.meetno = m.meetno;
+
+
+SELECT e.ename,t.topic FROM emps e
+INNER JOIN emp_meeting m ON e.empno=m.empno
+INNER JOIN meeting t ON m.meetno = t.meetno;
+
+
+
+
+-- display ename,topic,dist,tal of all emps
+
+SELECT * FROM emps;
+SELECT * FROM addr;
+SELECT * FROM meeting;
+SELECT * FROM emp_meeting;
+
+
+SELECT e.ename,a.tal,a.dist FROM emps e
+INNER JOIN addr a ON e.empno=a.empno; 
+
+SELECT e.ename,m.meetno FROM emps e
+INNER JOIN emp_meeting m ON e.empno=m.empno
+
+SELECT t.topic,m.empno FROM meeting t
+INNER JOIN emp_meeting m ON t.meetno = m.meetno;
+
+
+
+SELECT e.ename,a.tal,a.dist FROM emps e
+INNER JOIN emp_meeting m ON e.empno=m.empno;
+INNER JOIN meeting t ON m.meetno = t.meetno;
+
+
+SELECT e.ename,a.tal,a.dist FROM emps e
+INNER JOIN emp_meeting m ON e.empno=m.empno;
+INNER JOIN meeting t ON m.meetno = t.meetno;
+INNER JOIN addr a ON e.empno = a.empno;
+
+************ incomplete query ************
+
+-- display ename,dname 
+
+
+
+
+************************************************************
+
+-- print dname and count of emps in that dept
+
+SELECT * FROM emps;
+SELECT * FROM depts;
+
+SELECT deptno,COUNT(empno) FROM emps GROUP BY deptno;
+
+SELECT d.dname,COUNT(e.empno) FROM emps e
+INNER JOIN depts d ON e.deptno = d.deptno
+GROUP BY d.dname;
+
+
+SELECT d.dname,COUNT(e.empno) FROM emps e
+RIGHT JOIN depts d ON e.deptno = d.deptno
+GROUP BY d.dname;
+
+
+
+-- display ename and count of meetings attended by emps in desc order of meeting count
+
+SELECT * FROM emps;
+SELECT * FROM emp_meeting;
+
+
+SELECT empno,COUNT(meetno) FROM emp_meeting GROUP BY empno;
+
+SELECT empno,COUNT(meetno) FROM emp_meeting GROUP BY empno ORDER BY 2 DESC;
+
+SELECT e.ename,COUNT(m.meetno) FROM emp_meeting m 
+INNER JOIN emps e ON m.empno = e.empno
+GROUP BY e.ename ORDER BY 2 DESC;
+
+
+
+-- display all emps from DEV department
+
+SELECT * FROM emps;
+
+SELECT e.ename,d.dname FROM emps e
+INNER JOIN depts d ON e.deptno=d.deptno;
+
+SELECT e.ename FROM emps e 
+INNER JOIN depts d ON e.deptno=d.deptno
+WHERE dname = "DEV";
+
+***********************************************************************
+
+
+
+## USAGE OF ALL CLAUSES
+
+SELECT col1,col2 FROM table_name1
+XXX JOIN table_name2 ON ___
+XXX JOIN table_name3 ON ___
+WHERE condition
+GROUP BY col
+HAVING condition
+ORDER BY col
+LIMIT;
+
+
+
+************************************************************************
+
+### NON STANDARD JOINS==
+
+
+-- display ename and dname from emps and depts table
+
+SELECT e.ename,d.dname FROM emps e
+INNER JOIN depts d ON e.deptno=d.deptno;
+
+
+SELECT e.ename,d.dname FROM emps e
+JOIN depts d ON e.deptno=d.deptno;
+
+
+--- writing a join without the mentioning type will always consider it as INNER JOIN
+
+SELECT e.ename,d.dname FROM emps e
+CROSS JOIN depts d ON e.deptno=d.deptno;
+
+
+SELECT e.ename,d.dname FROM emps e
+CROSS JOIN depts d WHERE e.deptno=d.deptno; ----------wrong way of doing query
+
+
+SELECT e.ename,d.dname FROM emps e,
+depts d WHERE e.deptno=d.deptno;            -----------Old Style Join
+
+
+SELECT e.ename,d.dname FROM emps e
+JOIN depts d USING(deptno);
+  
+
+SELECT e.ename,d.dname FROM emps e
+NATURAL JOIN depts d;
+  
+
+-- display all the possible combination of depts for AMIT and NILESH
+
+SELECT e.ename,d.dname FROM emps e
+CROSS JOIN depts d WHERE e.name IN("AMIT","NILESH");
+
+
+
+
+
